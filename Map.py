@@ -198,18 +198,6 @@ def generateMap(n: int, *, numColor: int = 4, minimalCutsetSize: int = 1) -> Map
                 edges_i.add(link)
                 _dfs(link[0], visited, links_i, edges_i)
 
-    def _bfs(stack: List[Point], visited: Set[Point], links_i: Set[tuple], edges_i: Set[tuple]):
-        while stack:
-            root = stack.pop(0)
-            visited.add(root)
-            for link in links_i:
-                if link[0] is root and link[1] not in visited and link[1] not in stack:
-                    stack.append(link[1])
-                    edges_i.add(link)
-                elif link[1] is root and link[0] not in visited and link[0] not in stack:
-                    stack.append(link[0])
-                    edges_i.add(link)
-
     m = Map(numColor)
 
     points = generatePoints(n)
@@ -229,26 +217,9 @@ def generateMap(n: int, *, numColor: int = 4, minimalCutsetSize: int = 1) -> Map
 
     edges = set()
     setrecursionlimit(n*3)
-    #_bfs([m.getRegions().pop()], set(), links, edges)
     _dfs(m.getRegions().pop(), set(), links, edges)
     for edge in edges:
         m.addBorder(edge[0], edge[1])
-
-    # additionalEdges = 0
-    # ps = m.getRegions()
-    # cutset = set()
-    # cutset.add(ps.pop())
-    # while additionalEdges < 1:
-    #     p1 = cutset.pop()
-    #     p2 = ps.pop()
-    #     if linkPossible(edges, p1, p2):
-    #         m.addBorder(p1, p2)
-    #         edges.add((p1, p2))
-    #         cutset.add(p2)
-    #         additionalEdges += 1
-    #     else:
-    #         ps.add(p2)
-    #     cutset.add(p1)
 
     cutset = []
     ps = m.getRegions()
