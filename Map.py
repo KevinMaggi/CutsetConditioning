@@ -171,7 +171,7 @@ def linkPossible(links: Set[tuple], a: Point, b: Point) -> bool:
 
 def generateMap(n: int, *, numColor: int = 4, minimalCutsetSize: int = 1) -> Map:
     """
-    Generate a map like explained in R&N 2010 exercise 6.10
+    Generate a map like explained in R&N 2010 exercise 6.10 (then finds a spanning tree and adds some links)
     :param minimalCutsetSize: size of minimal cutset
     :param numColor: number of color for variables' domain in CSP
     :param n: number of region
